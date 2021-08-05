@@ -21,13 +21,7 @@ public class UserController {
     private ResponseEntity<User> getUSer(){
 
         User user = new User();
-        user.setName("Padradas");
-
-        Gas gas = new Gas();
-        Water water = new Water();
-        gas.setName("Shell");
-        user.addResource(gas);
-        user.addResource(water);
+        user.setName("J");
 
         userRepository.save(user);
 
