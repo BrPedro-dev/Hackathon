@@ -1,6 +1,8 @@
 package org.academiadecodigo.hackaton.controllers;
 
 import org.academiadecodigo.hackaton.models.User;
+import org.academiadecodigo.hackaton.models.resources.Gas;
+import org.academiadecodigo.hackaton.models.resources.Water;
 import org.academiadecodigo.hackaton.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
