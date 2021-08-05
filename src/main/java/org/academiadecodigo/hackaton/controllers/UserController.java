@@ -26,12 +26,6 @@ public class UserController {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/add")
-    private ResponseEntity<List<User>> addUsers(){
-
-        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
-    }
-
     @GetMapping("/user/{id}")
     private ResponseEntity<?> getUser(@PathVariable Integer id){
 
