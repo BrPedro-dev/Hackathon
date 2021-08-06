@@ -1,8 +1,10 @@
 package org.academiadecodigo.hackaton.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
-
+@Data
 @MappedSuperclass
 public abstract class AbstractModel {
 
@@ -13,27 +15,4 @@ public abstract class AbstractModel {
     @Version
     private Integer version;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractModel{" +
-                "id=" + id +
-                ", version=" + version +
-                '}';
-    }
 }

@@ -2,7 +2,9 @@ package org.academiadecodigo.hackaton.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.academiadecodigo.hackaton.models.resources.Gas;
 import org.academiadecodigo.hackaton.models.resources.Resource;
+import org.academiadecodigo.hackaton.models.resources.Water;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,9 +12,20 @@ import java.util.List;
 
 @Data
 @Entity
-public class User extends AbstractModel{
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
+
+    public User(){
+        Gas gas = new Gas();
+        addResource(gas);
+        Water water = new Water();
+        addResource(water);
+    }
 
     @OneToMany(
             // propagate changes on customer entity to account entities

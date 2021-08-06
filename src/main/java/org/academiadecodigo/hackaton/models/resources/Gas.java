@@ -1,26 +1,18 @@
 package org.academiadecodigo.hackaton.models.resources;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 
+@Data
 @Entity
 public class Gas extends Resource {
 
-    private String name;
-    private Integer galons = 100;
+    private final String name = "Gas";
+    private Integer id;
 
-    public String getName() {
-        return name;
+    public Gas(){
+        super.setQuantity(100);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getGalons() {
-        return galons;
-    }
-
-    public void setGalons(Integer galons) {
-        this.galons = galons;
-    }
 }
