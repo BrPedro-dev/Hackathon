@@ -2,6 +2,7 @@ package org.academiadecodigo.hackaton.service;
 
 
 import org.academiadecodigo.hackaton.models.User;
+import org.academiadecodigo.hackaton.models.resources.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,26 +18,26 @@ public class ServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void trade(User srcUser, User dstUser, Integer type, Integer amount ) {
+    public void trade(User srcUser, Resource anotherResourceSrc, Resource resourceSrc, User dstUser, Resource resourceDst, Resource anotherResourceDst, Integer amount ) {
 
 
         if (randomNumberGenerator >= 0.8) {
-            transferImpl.transfer(srcUser, dstUser, type, amount);
+            transferImpl.transfer(srcUser, anotherResourceSrc, resourceSrc, dstUser,resourceDst,anotherResourceDst,amount);
             System.out.println("Trade Successfully.");
 
         } else if (randomNumberGenerator >= 0.7) {
-            transferImpl.loseAll(srcUser, type, amount);
+            transferImpl.loseAll(srcUser, anotherResourceDst, amount);
             System.out.println("oh no.. you got mugged.");
 
 
 
         } else if (randomNumberGenerator >= 0.5) {
-            transferImpl.transferHaggle(srcUser,dstUser,type,amount);
+            transferImpl.transferHaggle(srcUser, anotherResourceSrc, resourceSrc, dstUser,resourceDst,anotherResourceDst,amount);
             System.out.println("You managed to haggle your way into his wares.");
 
 
         } else if (randomNumberGenerator >= 0.3) {
-            transferImpl.transferAllFromDst(srcUser, dstUser, type, amount);
+            transferImpl.transferAllFromDst(srcUser, anotherResourceSrc, resourceSrc, dstUser,resourceDst,anotherResourceDst,amount);
             System.out.println("You killed the person and stole all his wares.");
 
 

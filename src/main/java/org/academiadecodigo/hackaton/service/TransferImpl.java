@@ -24,167 +24,86 @@ public class TransferImpl implements TransferService {
 
     @Transactional
     @Override
-    public void transfer(User srcUser, User dstUser, Integer type, Integer amount) {
+    public void transfer(User srcUser,Resource anotherResourceSrc,Resource resourceSrc, User dstUser,Resource resourceDst,Resource anotherResourceDst, Integer amount) {
 
-        List<Resource> srcUserResources = srcUser.getResources();
-        List<Resource> dstUserResources = dstUser.getResources();
+            if(anotherResourceSrc.getQuantity() != 0 && resourceDst.getQuantity() != 0){
 
-        if(type == 1){
+                anotherResourceSrc.setQuantity(anotherResourceSrc.getQuantity() - amount);
+                resourceSrc.setQuantity(resourceSrc.getQuantity() + amount);
 
-            Resource srcWater = srcUserResources.get(1);
-            Resource dstWater = dstUserResources.get(1);
-            Water sourceWater = (Water) srcWater;
-            Water DestinationWater = (Water) dstWater;
+                resourceDst.setQuantity(resourceDst.getQuantity() - amount);
+                anotherResourceDst.setQuantity(anotherResourceDst.getQuantity() + amount);
 
-            if(sourceWater.getLts() != 0 && DestinationWater.getLts() != 0){
-                sourceWater.setLts(sourceWater.getLts() - amount);
-                DestinationWater.setLts(DestinationWater.getLts() + amount);
                 userRepository.saveAndFlush(srcUser);
                 userRepository.saveAndFlush(dstUser);
             }
-        } if (type == 0 ){
-            Resource srcGas = srcUserResources.get(0);
-            Resource dstGas = dstUserResources.get(0);
-            Gas SourceGas = (Gas) srcGas;
-            Gas DestinationGas = (Gas) dstGas;
+        }
 
-            if(SourceGas.getGalons() != 0 && DestinationGas.getGalons() != 0){
-                SourceGas.setGalons(SourceGas.getGalons() - amount);
-                DestinationGas.setGalons(SourceGas.getGalons() + amount);
-                userRepository.saveAndFlush(srcUser);
-                userRepository.saveAndFlush(dstUser);
-            }
+
+    @Transactional
+    @Override
+    public void loseAll(User srcUser, Resource resource, Integer amount) {
+
+        if(resource.getQuantity() != 0){
+            resource.setQuantity(resource.getQuantity() - amount);
+            userRepository.saveAndFlush(srcUser);
+        }
+
+    }
+
+    @Transactional
+    @Override
+    public void transferHaggle(User srcUser,Resource anotherResourceSrc,Resource resourceSrc, User dstUser,Resource resourceDst,Resource anotherResourceDst, Integer amount) {
+        if(anotherResourceSrc.getQuantity() != 0 && resourceDst.getQuantity() != 0){
+
+            anotherResourceSrc.setQuantity(anotherResourceSrc.getQuantity() - (amount-1));
+            resourceSrc.setQuantity(resourceSrc.getQuantity() + (amount + 1));
+
+            resourceDst.setQuantity(resourceDst.getQuantity() - (amount + 1));
+            anotherResourceDst.setQuantity(anotherResourceDst.getQuantity() + (amount - 1));
+
+            userRepository.saveAndFlush(srcUser);
+            userRepository.saveAndFlush(dstUser);
         }
     }
 
     @Transactional
     @Override
-    public void loseAll(User srcUser, Integer type, Integer amount) {
+    public void transferAllFromDst(User srcUser,Resource anotherResourceSrc,Resource resourceSrc, User dstUser,Resource resourceDst,Resource anotherResourceDst, Integer amount) {
 
-        List<Resource> srcUserResources = srcUser.getResources();
 
-        if (type == 1) {
-            Resource srcWater = srcUserResources.get(1);
-            Water sourceWater = (Water) srcWater;
+        if(anotherResourceSrc.getQuantity() != 0 && resourceDst.getQuantity() != 0){
 
-            if (sourceWater.getLts() != 0) {
-                sourceWater.setLts(sourceWater.getLts() - amount);
-                userRepository.saveAndFlush(srcUser);
-            }
+            anotherResourceSrc.setQuantity(anotherResourceSrc.getQuantity() + amount);
+            resourceSrc.setQuantity(resourceSrc.getQuantity() + amount);
 
-        }if (type == 0 ){
-            Resource srcGas = srcUserResources.get(0);
-            Gas SourceGas = (Gas) srcGas;
+            resourceDst.setQuantity(resourceDst.getQuantity() - amount);
+            anotherResourceDst.setQuantity(anotherResourceDst.getQuantity() - amount);
 
-            if(SourceGas.getGalons() != 0){
-                SourceGas.setGalons(SourceGas.getGalons() - amount);
-                userRepository.saveAndFlush(srcUser);
-            }
+            userRepository.saveAndFlush(srcUser);
+            userRepository.saveAndFlush(dstUser);
         }
-    }
 
-    @Transactional
-    @Override
-    public void transferHaggle(User srcUser, User dstUser, Integer type, Integer amount) {
-        List<Resource> srcUserResources = srcUser.getResources();
-        List<Resource> dstUserResources = dstUser.getResources();
-
-        if(type == 1){
-
-            Resource srcWater = srcUserResources.get(1);
-            Resource dstWater = dstUserResources.get(1);
-            Water sourceWater = (Water) srcWater;
-            Water DestinationWater = (Water) dstWater;
-
-            if(sourceWater.getLts() != 0 && DestinationWater.getLts() != 0){
-                sourceWater.setLts(sourceWater.getLts() - amount +(1));
-                DestinationWater.setLts(DestinationWater.getLts() + amount -(1));
-                userRepository.saveAndFlush(srcUser);
-                userRepository.saveAndFlush(dstUser);
-            }
-        } if (type == 0 ){
-            Resource srcGas = srcUserResources.get(0);
-            Resource dstGas = dstUserResources.get(0);
-            Gas SourceGas = (Gas) srcGas;
-            Gas DestinationGas = (Gas) dstGas;
-
-            if(SourceGas.getGalons() != 0 && DestinationGas.getGalons() != 0){
-                SourceGas.setGalons(SourceGas.getGalons() - amount +(1));
-                DestinationGas.setGalons(SourceGas.getGalons() + amount -(1));
-                userRepository.saveAndFlush(srcUser);
-                userRepository.saveAndFlush(dstUser);
-            }
-        }
-    }
-
-    @Transactional
-    @Override
-    public void transferAllFromDst(User srcUser, User dstUser, Integer type, Integer amount) {
-
-        List<Resource> srcUserResources = srcUser.getResources();
-        List<Resource> dstUserResources = dstUser.getResources();
-
-        if(type == 1){
-
-            Resource srcWater = srcUserResources.get(1);
-            Resource dstWater = dstUserResources.get(1);
-            Water sourceWater = (Water) srcWater;
-            Water DestinationWater = (Water) dstWater;
-
-            if(sourceWater.getLts() != 0 && DestinationWater.getLts() != 0){
-                sourceWater.setLts(sourceWater.getLts() + amount);
-                DestinationWater.setLts(DestinationWater.getLts() - amount );
-                userRepository.saveAndFlush(srcUser);
-                userRepository.saveAndFlush(dstUser);
-            }
-        } if (type == 0 ){
-            Resource srcGas = srcUserResources.get(0);
-            Resource dstGas = dstUserResources.get(0);
-            Gas SourceGas = (Gas) srcGas;
-            Gas DestinationGas = (Gas) dstGas;
-
-            if(SourceGas.getGalons() != 0 && DestinationGas.getGalons() != 0){
-                SourceGas.setGalons(SourceGas.getGalons() + amount );
-                DestinationGas.setGalons(SourceGas.getGalons() - amount );
-                userRepository.saveAndFlush(srcUser);
-                userRepository.saveAndFlush(dstUser);
-            }
-        }
     }
 
 
     @Transactional
     @Override
-    public void transferAllFromUser(User srcUser, User dstUser, Integer type, Integer amount) {
+    public void transferAllFromUser(User srcUser,Resource anotherResourceSrc,Resource resourceSrc, User dstUser,Resource resourceDst,Resource anotherResourceDst, Integer amount) {
 
-        List<Resource> srcUserResources = srcUser.getResources();
-        List<Resource> dstUserResources = dstUser.getResources();
+        if(anotherResourceSrc.getQuantity() != 0 && resourceDst.getQuantity() != 0){
 
-        if(type == 1){
+            resourceDst.setQuantity(resourceDst.getQuantity() + anotherResourceSrc.getQuantity());
+            anotherResourceDst.setQuantity(anotherResourceDst.getQuantity() + resourceDst.getQuantity());
 
-            Resource srcWater = srcUserResources.get(1);
-            Resource dstWater = dstUserResources.get(1);
-            Water sourceWater = (Water) srcWater;
-            Water DestinationWater = (Water) dstWater;
 
-            if(sourceWater.getLts() != 0 && DestinationWater.getLts() != 0){
-                sourceWater.setLts(sourceWater.getLts() - amount);
-                DestinationWater.setLts(DestinationWater.getLts() + amount );
-                userRepository.saveAndFlush(srcUser);
-                userRepository.saveAndFlush(dstUser);
-            }
-        } if (type == 0 ){
-            Resource srcGas = srcUserResources.get(0);
-            Resource dstGas = dstUserResources.get(0);
-            Gas SourceGas = (Gas) srcGas;
-            Gas DestinationGas = (Gas) dstGas;
+            anotherResourceSrc.setQuantity(0);
+            resourceSrc.setQuantity(0);
 
-            if(SourceGas.getGalons() != 0 && DestinationGas.getGalons() != 0){
-                SourceGas.setGalons(SourceGas.getGalons() - amount );
-                DestinationGas.setGalons(SourceGas.getGalons() + amount );
-                userRepository.saveAndFlush(srcUser);
-                userRepository.saveAndFlush(dstUser);
-            }
+
+
+            userRepository.saveAndFlush(srcUser);
+            userRepository.saveAndFlush(dstUser);
         }
     }
     @Transactional
