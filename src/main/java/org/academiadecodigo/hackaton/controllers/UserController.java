@@ -19,13 +19,26 @@ public class UserController {
 
     private UserRepository userRepository;
 
+    private TransferImpl transfer;
+
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    @Autowired
+    public void setTransfer(TransferImpl transfer) {
+        this.transfer = transfer;
+    }
+
+    @GetMapping("/trade")
+    private ResponseEntity<?> getUsers(){
+        transfer.transfer(userRepository.getById(1),userRepository.getById(4),1,10);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping("/users")
-    private ResponseEntity<List<User>> getUsers(){
+    private ResponseEntity<?> getUsersss(){
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
