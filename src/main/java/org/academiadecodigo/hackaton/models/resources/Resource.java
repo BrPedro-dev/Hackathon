@@ -24,6 +24,8 @@ public abstract class Resource {
     @ManyToOne
     private User user;
 
+    private String name;
+
     private Integer quantity;
 
     public User getUser() {

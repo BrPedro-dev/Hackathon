@@ -2,9 +2,7 @@ package org.academiadecodigo.hackaton.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
-import org.academiadecodigo.hackaton.models.resources.Gas;
-import org.academiadecodigo.hackaton.models.resources.Resource;
-import org.academiadecodigo.hackaton.models.resources.Water;
+import org.academiadecodigo.hackaton.models.resources.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,10 +19,14 @@ public class User {
     private String name;
 
     public User(){
-        Gas gas = new Gas();
-        addResource(gas);
         Water water = new Water();
         addResource(water);
+        Gas gas = new Gas();
+        addResource(gas);
+        Supplies supplies = new Supplies();
+        addResource(supplies);
+        Weapons weapons = new Weapons();
+        addResource(weapons);
     }
 
     @OneToMany(

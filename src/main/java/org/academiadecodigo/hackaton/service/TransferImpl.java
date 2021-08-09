@@ -26,7 +26,6 @@ public class TransferImpl implements TransferService {
     @Override
     public void transfer(User srcUser,Resource anotherResourceSrc,Resource resourceSrc, User dstUser,Resource resourceDst,Resource anotherResourceDst, Integer amount) {
 
-            if(anotherResourceSrc.getQuantity() != 0 && resourceDst.getQuantity() != 0){
 
                 anotherResourceSrc.setQuantity(anotherResourceSrc.getQuantity() - amount);
                 resourceSrc.setQuantity(resourceSrc.getQuantity() + amount);
@@ -36,7 +35,7 @@ public class TransferImpl implements TransferService {
 
                 userRepository.saveAndFlush(srcUser);
                 userRepository.saveAndFlush(dstUser);
-            }
+
         }
 
 
@@ -44,17 +43,16 @@ public class TransferImpl implements TransferService {
     @Override
     public void loseAll(User srcUser, Resource resource, Integer amount) {
 
-        if(resource.getQuantity() != 0){
+
             resource.setQuantity(resource.getQuantity() - amount);
             userRepository.saveAndFlush(srcUser);
-        }
 
     }
 
     @Transactional
     @Override
     public void transferHaggle(User srcUser,Resource anotherResourceSrc,Resource resourceSrc, User dstUser,Resource resourceDst,Resource anotherResourceDst, Integer amount) {
-        if(anotherResourceSrc.getQuantity() != 0 && resourceDst.getQuantity() != 0){
+
 
             anotherResourceSrc.setQuantity(anotherResourceSrc.getQuantity() - (amount-1));
             resourceSrc.setQuantity(resourceSrc.getQuantity() + (amount + 1));
@@ -64,7 +62,7 @@ public class TransferImpl implements TransferService {
 
             userRepository.saveAndFlush(srcUser);
             userRepository.saveAndFlush(dstUser);
-        }
+
     }
 
     @Transactional
@@ -72,7 +70,6 @@ public class TransferImpl implements TransferService {
     public void transferAllFromDst(User srcUser,Resource anotherResourceSrc,Resource resourceSrc, User dstUser,Resource resourceDst,Resource anotherResourceDst, Integer amount) {
 
 
-        if(anotherResourceSrc.getQuantity() != 0 && resourceDst.getQuantity() != 0){
 
             anotherResourceSrc.setQuantity(anotherResourceSrc.getQuantity() + amount);
             resourceSrc.setQuantity(resourceSrc.getQuantity() + amount);
@@ -82,7 +79,6 @@ public class TransferImpl implements TransferService {
 
             userRepository.saveAndFlush(srcUser);
             userRepository.saveAndFlush(dstUser);
-        }
 
     }
 
@@ -91,7 +87,7 @@ public class TransferImpl implements TransferService {
     @Override
     public void transferAllFromUser(User srcUser,Resource anotherResourceSrc,Resource resourceSrc, User dstUser,Resource resourceDst,Resource anotherResourceDst, Integer amount) {
 
-        if(anotherResourceSrc.getQuantity() != 0 && resourceDst.getQuantity() != 0){
+
 
             resourceDst.setQuantity(resourceDst.getQuantity() + anotherResourceSrc.getQuantity());
             anotherResourceDst.setQuantity(anotherResourceDst.getQuantity() + resourceDst.getQuantity());
@@ -104,7 +100,6 @@ public class TransferImpl implements TransferService {
 
             userRepository.saveAndFlush(srcUser);
             userRepository.saveAndFlush(dstUser);
-        }
     }
     @Transactional
     @Override

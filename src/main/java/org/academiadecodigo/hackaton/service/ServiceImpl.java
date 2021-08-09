@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ServiceImpl implements UserService {
 
-    private double randomNumberGenerator = Math.random();
+
     private User user;
 
     @Autowired
@@ -20,6 +20,8 @@ public class ServiceImpl implements UserService {
     @Override
     public void trade(User srcUser, Resource anotherResourceSrc, Resource resourceSrc, User dstUser, Resource resourceDst, Resource anotherResourceDst, Integer amount ) {
 
+        double randomNumberGenerator = Math.random();
+        System.out.println(randomNumberGenerator);
 
         if (randomNumberGenerator >= 0.8) {
             transferImpl.transfer(srcUser, anotherResourceSrc, resourceSrc, dstUser,resourceDst,anotherResourceDst,amount);

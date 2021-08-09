@@ -8,14 +8,15 @@ import javax.persistence.Entity;
 @Data
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Gas extends Resource {
+public class Weapons extends Resource {
 
-    private final String name = "Gas";
+    private final String name = "Weapons";
     private Integer id;
 
-    public Gas(){
-        super.setQuantity(100);
+    public Weapons() {
+        super.setQuantity(2);
         super.setName(name);
     }
+
 
 }
