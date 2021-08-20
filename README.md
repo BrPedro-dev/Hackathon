@@ -67,13 +67,20 @@ Pedro Silva
 
 <a href="http://www.linkedin.com/in/pedro-silva-dev" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
 
+<a href="https://github.com/BrPedro-dev" rel="noopener noreferrer" target="_blank"><img src="https://www.kindpng.com/picc/m/128-1280187_github-logo-png-github-transparent-png.png" alt="github.png" width="111px"></a>
+
 Frederico Gonçalves
 
 <a href="https://www.linkedin.com/in/fredericobgoncalves" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
 
+
+<a href="https://github.com/fredericobgoncalves" rel="noopener noreferrer" target="_blank"><img src="https://www.kindpng.com/picc/m/128-1280187_github-logo-png-github-transparent-png.png" alt="github.png" width="111px"></a>
+
 Hugo Silveira
 
 <a href="https://www.linkedin.com/in/hugompsilveira/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+
+<a href="https://github.com/madshot10" rel="noopener noreferrer" target="_blank"><img src="https://www.kindpng.com/picc/m/128-1280187_github-logo-png-github-transparent-png.png" alt="github.png" width="111px"></a>
 
 Brigite Oleiro
 
@@ -82,6 +89,8 @@ Brigite Oleiro
 Filipe Yum
 
 <a href="https://www.linkedin.com/in/filipeyum/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+
+<a href="https://github.com/Zentee" rel="noopener noreferrer" target="_blank"><img src="https://www.kindpng.com/picc/m/128-1280187_github-logo-png-github-transparent-png.png" alt="github.png" width="111px"></a>
 
 João Borges
 
