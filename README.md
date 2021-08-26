@@ -61,6 +61,8 @@ git clone https://github.com/BrPedro-dev/Hackathon.git
 java -jar hackaton-0.0.1-SNAPSHOT.jar
 ```
 
+<h3>𝗧𝗵𝗮𝗻𝗸𝘀 𝗙𝗼𝗿 𝗩𝗶𝘀𝗶𝘁𝗶𝗻𝗴 <img height="40" src="https://emoji.gg/assets/emoji/7333-parrotdance.gif"> </h3>
+
 # Authors
 
 Pedro Silva
